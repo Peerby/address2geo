@@ -1,11 +1,11 @@
 {
-  "name": "address2geo",
+  "name": "address4geo",
   "version": "0.0.1",
   "description": "a module for supplying the fields an international address has based on geo",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Peerby/address2geo.git"
+    "url": "git://github.com/Peerby/address4geo.git"
   },
   "keywords": [
     "localization",
