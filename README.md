@@ -40,6 +40,12 @@ Details
 
 - If the values of the fields are correctly provided by the user and are comma-separated concatenated, [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/) should return a geolocation that is accurately enough (needs definition).
 
+Resources
+--------------------
+
+- http://www.uxmatters.com/mt/archives/2008/06/international-address-fields-in-web-forms.php
+- http://www.grcdi.nl/Better%20data%20quality%20from%20your%20web%20form%20by%20Graham%20Rhind.pdf
+
 
 Thanks
 --------------------
