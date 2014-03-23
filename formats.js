@@ -1,3 +1,5 @@
+/*jslint node: true */
+
 var _ = require('underscore');
 
 

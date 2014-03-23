@@ -1,3 +1,6 @@
+/*jslint node: true */
+/*global describe, it, before, beforeEach, after, afterEach */
+
 "use strict";
 var _ = require('underscore');
 var expect = require('expect.js');
@@ -65,8 +68,8 @@ describe('all country formats', function () {
             _.each(country.presentation, function (line) {
                 _.each(line, function (field) {
                     expect(country.fields).to.have.property(field);
-                })
-            })
+                });
+            });
         });
     });
 });

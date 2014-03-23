@@ -1,3 +1,5 @@
+/*jslint node: true */
+
 "use strict";
 var _ = require('underscore');
 var formats = require('./formats.js');
@@ -13,12 +15,12 @@ function format(country) {
     }
     country = String(country).toLowerCase();
     return formats[country] || formats.defaults;
-};
+}
 
 
 function allFormats() {
     return formats;
-};
+}
 
 
 function validate(country, address) {
