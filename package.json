@@ -1,8 +1,11 @@
 {
   "name": "address4geo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a module for supplying the fields an international address has based on geo",
   "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/Peerby/address4geo.git"
@@ -12,6 +15,13 @@
     "address",
     "geo"
   ],
+  "dependencies": {
+    "underscore": "1.4.x"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "expect": "*"
+  },
   "author": "Peerby",
   "license": "MIT"
 }
