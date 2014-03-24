@@ -12,7 +12,9 @@ Form design for **minimal address forms** so that user-provided address data can
 Details
 -----------------
 
-- `formats.js` is a lookup dictonary, which has a defaults property and one entry per supported country.
+- `getFormat(country)` returns the address format for the specified `country` in [ISO-3166-1 Alpha-2 code format](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+
+- `getFormats()` returns a dictionary, which has a defaults property and one entry per supported country.
 
 - Returned data is an Array: each item is an address line. Each address line is represented as an Array: each item is an object with the following properties:
 
@@ -35,7 +37,7 @@ Details
 		- province
 
 		- state
-		
+
 	- `values`: Array of Strings, possible values (eg. county names)
 	
 	- `optional`: Boolean, indicates if field is always required.
