@@ -1,12 +1,13 @@
 Address formats
 ================
 
-Form design for **minimal address forms** so that user-provided address data can be successfully geocoded to a geolocation with [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/). This module currently works for the following countries (and otherwise defaults to a working format):
+Form design for **minimal address forms** so that user-provided address data can be successfully geocoded to a geolocation with [Google Geocodin API](https://developers.google.com/maps/documentation/geocoding/). This module currently works for the following countries (and otherwise defaults to a working format):
 
 - be: Belgium
 - ie: Ireland
 - nl: Netherlands
 - uk: United Kingdom
+- us: United States
 - defaults: all other countries
 
 API
@@ -41,11 +42,10 @@ Definitions
 
 - `format` is an object containing two sections
 
-	- fields object 
+	- fields object
 	- presentation array containing lines with fields
-	
-	see `formats.js` for details
 
+	see `formats.js` for details
 
 	for the field definitions the following properties can be set:
 
