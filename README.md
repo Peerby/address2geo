@@ -28,9 +28,13 @@ Details
 		
 		- zip
 		
-		- state
-		
+		- locality
+
 		- county
+
+		- province
+
+		- state
 		
 	- `values`: Array of Strings, possible values (eg. county names)
 	
