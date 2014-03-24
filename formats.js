@@ -113,6 +113,84 @@ var ie = {
 };
 
 
+var us = {
+    fields: {
+        streetName: {},
+        streetNumber: {},
+        locality: {},
+        state: {
+            values: [
+                'AL',
+                'AK',
+                'AR',
+                'AS',
+                'AZ',
+                'CA',
+                'CO',
+                'CT',
+                'DC',
+                'DE',
+                'FL',
+                'GA',
+                'GU',
+                'HI',
+                'IA',
+                'ID',
+                'IL',
+                'IN',
+                'KS',
+                'KY',
+                'LA',
+                'MA',
+                'MD',
+                'ME',
+                'MI',
+                'MN',
+                'MO',
+                'MP',
+                'MS',
+                'MT',
+                'NC',
+                'ND',
+                'NE',
+                'NH',
+                'NJ',
+                'NM',
+                'NV',
+                'NY',
+                'OH',
+                'OK',
+                'OR',
+                'PA',
+                'PR',
+                'RI',
+                'SC',
+                'SD',
+                'TN',
+                'TX',
+                'UM',
+                'UT',
+                'VA',
+                'VI',
+                'VT',
+                'WA',
+                'WI',
+                'WV',
+                'WY'
+            ]
+        },
+        zip: {
+            regexp: /^\d{5}(-\d{4})?$/    // '12345-0011' or '12345')
+        }
+    },
+    presentation: [
+        ['streetNumber', 'streetName'],
+        ['locality'],
+        ['state', 'zip']
+    ]
+};
+
+
 /*
     Exports
 */
@@ -122,5 +200,6 @@ module.exports = {
   nl: nl,
   be: nl,
   uk: uk,
-  ie: ie
+  ie: ie,
+  us: us
 };

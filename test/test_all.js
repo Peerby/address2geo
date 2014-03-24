@@ -8,7 +8,7 @@ var address4geo = require('../index.js');
 
 
 
-var countryCodes = ['defaults', 'be', 'ie', 'nl', 'uk'];
+var countryCodes = ['defaults', 'be', 'ie', 'nl', 'uk', 'us'];
 var fieldOptions = {
     example: {
         type: typeof ""

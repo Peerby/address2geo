@@ -4,7 +4,8 @@
   "description": "a module for supplying the fields an international address has based on geo",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "tdd": "mocha -R spec -w"
   },
   "repository": {
     "type": "git",
