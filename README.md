@@ -1,50 +1,59 @@
 Address formats
 ================
 
-Form design for **minimal address forms** so that user-provided address data can be successfully geocoded to a geolocation with [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/). This module currently works for the following countries (and otherwise defaults to a working format):
+Form design for **minimal address forms** so that user-provided address data can be successfully geocoded to a geolocation with [Google Geocodin API](https://developers.google.com/maps/documentation/geocoding/). This module currently works for the following countries (and otherwise defaults to a working format):
 
 - be: Belgium
 - ie: Ireland
 - nl: Netherlands
 - uk: United Kingdom
+- us: United States
 - defaults: all other countries
 
-Details
+API
 -----------------
 
-- `getFormat(country)` returns the address format for the specified `country` in [ISO-3166-1 Alpha-2 code format](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+This section describes the API as exported by the module
 
-- `getFormats()` returns a dictionary, which has a defaults property and one entry per supported country.
+## format([country])
 
-- Returned data is an Array: each item is an address line. Each address line is represented as an Array: each item is an object with the following properties:
+returns the address-format for specified country or the default when the country when there is no specification for that country.
 
-	- `name`: String, type of field. Possible values:
-	
-		- addressLineOne
-		
-		- addressLineTwo
-		
-		- streetName
-		
-		- streetNumber
-		
-		- zip
-		
-		- locality
+## formats()
 
-		- county
+returns a list with all the formats for all the specified countries.
 
-		- province
+## validate(country, address)
 
-		- state
+returns an array with possible errors, empty array indicated the address is correct.
+
+
+## isValid(country, address)
+
+returns a boolean that indicates that the address is correct.
+
+
+Definitions
+-----------------
+
+- `country` is a two-letter countrycode as listed in [ISO-3166-1 Alpha-2 code format](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+
+- `address` is an object containing key/value pairs with field: value format
+
+- `format` is an object containing two sections
+
+	- fields object
+	- presentation array containing lines with fields
+
+	see `formats.js` for details
+
+	for the field definitions the following properties can be set:
 
 	- `values`: Array of Strings, possible values (eg. county names)
-	
-	- `optional`: Boolean, indicates if field is always required.
-	
-	- `example`: String, example of field.
 
-- If the values of the fields are correctly provided by the user and are comma-separated concatenated, [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/) should return a geolocation that is accurately enough (needs definition).
+	- `optional`: Boolean, indicates if field is always required.
+
+	- `example`: String, example for field.
 
 Resources
 --------------------
