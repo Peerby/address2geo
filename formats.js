@@ -71,7 +71,7 @@ var ie = {
         },
         locality: {},
         zip: {
-        	optional: true
+            optional: true
         },
         county: {
             values: [
@@ -135,7 +135,7 @@ var us = {
                 {value: 'GU', name: 'Guam'},
                 {value: 'HI', name: 'Hawaii'},
                 {value: 'ID', name: 'Idaho'},
-				{value: 'IL', name: 'Illinois'},
+                {value: 'IL', name: 'Illinois'},
                 {value: 'IN', name: 'Indiana'},
                 {value: 'IA', name: 'Iowa'},
                 {value: 'KS', name: 'Kansas'},
@@ -172,7 +172,7 @@ var us = {
                 {value: 'UT', name: 'Utah'},
                 {value: 'VT', name: 'Vermont'},
                 {value: 'VI', name: 'Virgin Islands'},
-                {value: 'VA', name: 'Virginia'},       
+                {value: 'VA', name: 'Virginia'},
                 {value: 'WA', name: 'Washington'},
                 {value: 'WV', name: 'West Virginia'},
                 {value: 'WI', name: 'Wisconsin'},
