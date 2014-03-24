@@ -1,6 +1,6 @@
 var formats = require('./formats.js');
 
-module.exports = function getFormat(countryCode){
+module.exports.getFormat = function (countryCode){
 	if (!countryCode) {
 		return formats.defaults;
 	}
@@ -9,6 +9,6 @@ module.exports = function getFormat(countryCode){
 	return formats[countryCode] || formats.defaults;
 };
 
-module.exports = function getAllFormats() {
+module.exports.getAllFormats = function () {
 	return formats;
 };
