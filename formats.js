@@ -1,7 +1,6 @@
 var toImplement = {
 	zipValidation: {
 		de: /^\d{2}\s?\d{3}$/, // 2 digits + [space] + 3 digits, e.g., '01000' or '01 000'
-		us: /^\d{5}(-\d{4})?$/, // 5 digits  + ['-' + 4 digits], e.g., '12345-0011' or '12345')
 		br: /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/
 		/*( ^ this validation was taken from http://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive#answer-7259020 )*/
 	}
@@ -107,6 +106,101 @@ module.exports = {
 		}],
 		[{
 			name: 'zip'
+		}]
+	],
+	us: [
+		[{
+			name: 'streetNumber'
+		},
+		{
+			name: 'streetName'
+		}],
+		[{
+			name: 'locality'
+		}],
+		[{
+			name: 'state',
+			values: [
+				'AL',
+				'AK',
+				'AR',
+				'AS',
+				'AZ',
+
+				'CA',
+				'CO',
+				'CT',
+
+				'DC',
+				'DE',
+
+				'FL',
+
+				'GA',
+				'GU',
+
+				'HI',
+
+				'IA',
+				'ID',
+				'IL',
+				'IN',
+
+				'KS',
+				'KY',
+
+				'LA',
+				
+				'MA',
+				'MD',
+				'ME',
+				'MI',
+				'MN',
+				'MO',
+				'MP',
+				'MS',
+				'MT',
+
+				'NC',
+				'ND',
+				'NE',
+				'NH',
+				'NJ',
+				'NM',
+				'NV',
+				'NY',
+				
+				'OH',
+				'OK',
+				'OR',
+
+				'PA',
+				'PR',
+
+				'RI',
+
+				'SC',
+				'SD',
+
+				'TN',
+				'TX',
+
+				'UM',
+				'UT',
+
+				'VA',
+				'VI',
+				'VT',
+
+				'WA',
+				'WI',
+				'WV',
+				'WY'
+			]
+		},
+		{
+			name: 'zip',
+			validator: /^\d{5}(-\d{4})?$/ // 5 digits  + ['-' + 4 digits], e.g., '12345-0011' or '12345')
 		}]
 	]
 };
