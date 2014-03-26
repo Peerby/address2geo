@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "mocha": "*",
-    "expect": "*"
+    "expect.js": "*"
   },
   "author": "Peerby",
   "license": "MIT"
