@@ -19,10 +19,10 @@ var defaults = {
         zip: {}
     },
     presentation: [
-        ['addressLineOne'],
-        ['addressLineTwo'],
-        ['locality'],
-        ['state', 'zip']
+        [{fieldName: 'addressLineOne'}],
+        [{fieldName: 'addressLineTwo'}],
+        [{fieldName: 'locality'}],
+        [{fieldName: 'state'}, {fieldName: 'zip'}]
     ]
 };
 
@@ -41,8 +41,8 @@ var nl = {
         }
     },
     presentation: [
-        ['streetName', 'streetNumber'],
-        ['zip']
+        [{fieldName: 'streetName'}, {fieldName: 'streetNumber', width: 0.3}],
+        [{fieldName: 'zip'}]
     ]
 };
 
@@ -56,9 +56,9 @@ var uk = {
         zip: {}
     },
     presentation: [
-        ['addressLineOne'],
-        ['addressLineTwo'],
-        ['zip'],
+        [{fieldName: 'addressLineOne'}],
+        [{fieldName: 'addressLineTwo'}],
+        [{fieldName: 'zip'}],
     ]
 };
 
@@ -70,42 +70,45 @@ var ie = {
             optional: true
         },
         locality: {},
-        zip: {},
+        zip: {
+        	optional: true
+        },
         county: {
             values: [
-                "Carlow",
-                "Cavan",
-                "Clare",
-                "Cork",
-                "Donegal",
-                "Dublin",
-                "Galway",
-                "Kerry",
-                "Kildare",
-                "Kilkenny",
-                "Laois",
-                "Leitrim",
-                "Limerick",
-                "Longford",
-                "Louth",
-                "Mayo",
-                "Meath",
-                "Monaghan",
-                "Offaly",
-                "Roscommon",
-                "Sligo",
-                "Tipperary",
-                "Waterford",
-                "Westmeath",
-                "Wexford",
-                "Wicklow"
+                {value: "Carlow"},
+                {value: "Cavan"},
+                {value: "Clare"},
+                {value: "Cork"},
+                {value: "Donegal"},
+                {value: "Dublin"},
+                {value: "Galway"},
+                {value: "Kerry"},
+                {value: "Kildare"},
+                {value: "Kilkenny"},
+                {value: "Laois"},
+                {value: "Leitrim"},
+                {value: "Limerick"},
+                {value: "Longford"},
+                {value: "Louth"},
+                {value: "Mayo"},
+                {value: "Meath"},
+                {value: "Monaghan"},
+                {value: "Offaly"},
+                {value: "Roscommon"},
+                {value: "Sligo"},
+                {value: "Tipperary"},
+                {value: "Waterford"},
+                {value: "Westmeath"},
+                {value: "Wexford"},
+                {value: "Wicklow"}
             ]
         }
     },
     presentation: [
-        ['addressLineOne'],
-        ['addressLineTwo'],
-        ['zip'],
+        [{fieldName: 'addressLineOne'}],
+        [{fieldName: 'addressLineTwo'}],
+        [{fieldName: 'locality'}],
+        [{fieldName: 'county'}, {fieldName: 'zip', width: 0.3}]
     ]
 };
 
@@ -117,63 +120,63 @@ var us = {
         locality: {},
         state: {
             values: [
-                'AL',
-                'AK',
-                'AR',
-                'AS',
-                'AZ',
-                'CA',
-                'CO',
-                'CT',
-                'DC',
-                'DE',
-                'FL',
-                'GA',
-                'GU',
-                'HI',
-                'IA',
-                'ID',
-                'IL',
-                'IN',
-                'KS',
-                'KY',
-                'LA',
-                'MA',
-                'MD',
-                'ME',
-                'MI',
-                'MN',
-                'MO',
-                'MP',
-                'MS',
-                'MT',
-                'NC',
-                'ND',
-                'NE',
-                'NH',
-                'NJ',
-                'NM',
-                'NV',
-                'NY',
-                'OH',
-                'OK',
-                'OR',
-                'PA',
-                'PR',
-                'RI',
-                'SC',
-                'SD',
-                'TN',
-                'TX',
-                'UM',
-                'UT',
-                'VA',
-                'VI',
-                'VT',
-                'WA',
-                'WI',
-                'WV',
-                'WY'
+                {value: 'AL', name: 'Alabama'},
+                {value: 'AK', name: 'Alaska'},
+                {value: 'AS', name: 'American Samoa'},
+                {value: 'AZ', name: 'Arizona'},
+                {value: 'AR', name: 'Arkansas'},
+                {value: 'CA', name: 'California'},
+                {value: 'CO', name: 'Colorado'},
+                {value: 'DC', name: 'Columbia'},
+                {value: 'CT', name: 'Connecticut'},
+                {value: 'DE', name: 'Delaware'},
+                {value: 'FL', name: 'Florida'},
+                {value: 'GA', name: 'Georgia'},
+                {value: 'GU', name: 'Guam'},
+                {value: 'HI', name: 'Hawaii'},
+                {value: 'ID', name: 'Idaho'},
+				{value: 'IL', name: 'Illinois'},
+                {value: 'IN', name: 'Indiana'},
+                {value: 'IA', name: 'Iowa'},
+                {value: 'KS', name: 'Kansas'},
+                {value: 'KY', name: 'Kentucky'},
+                {value: 'LA', name: 'Louisiana'},
+                {value: 'ME', name: 'Maine'},
+                {value: 'MD', name: 'Maryland'},
+                {value: 'MA', name: 'Massachusetts'},
+                {value: 'MI', name: 'Michigan'},
+                {value: 'MN', name: 'Minnesota'},
+                {value: 'MS', name: 'Mississippi'},
+                {value: 'MO', name: 'Missouri'},
+                {value: 'MT', name: 'Montana'},
+                {value: 'NE', name: 'Nebraska'},
+                {value: 'NV', name: 'Nevada'},
+                {value: 'NH', name: 'New Hampshire'},
+                {value: 'NJ', name: 'New Jersey'},
+                {value: 'NM', name: 'New Mexico'},
+                {value: 'NY', name: 'New York'},
+                {value: 'NC', name: 'North Carolina'},
+                {value: 'ND', name: 'North Dakota'},
+                {value: 'MP', name: 'Northern Mariana Islands'},
+                {value: 'OH', name: 'Ohio'},
+                {value: 'OK', name: 'Oklahoma'},
+                {value: 'OR', name: 'Oregon'},
+                {value: 'PA', name: 'Pennsylvania'},
+                {value: 'PR', name: 'Puerto Rico'},
+                {value: 'RI', name: 'Rhode Island'},
+                {value: 'SC', name: 'South Carolina'},
+                {value: 'SD', name: 'South Dakota'},
+                {value: 'TN', name: 'Tennessee'},
+                {value: 'TX', name: 'Texas'},
+                {value: 'UM', name: 'US Minor Outlying Islands'},
+                {value: 'UT', name: 'Utah'},
+                {value: 'VT', name: 'Vermont'},
+                {value: 'VI', name: 'Virgin Islands'},
+                {value: 'VA', name: 'Virginia'},       
+                {value: 'WA', name: 'Washington'},
+                {value: 'WV', name: 'West Virginia'},
+                {value: 'WI', name: 'Wisconsin'},
+                {value: 'WY', name: 'Wyoming'}
             ]
         },
         zip: {
@@ -181,9 +184,9 @@ var us = {
         }
     },
     presentation: [
-        ['streetNumber', 'streetName'],
-        ['locality'],
-        ['state', 'zip']
+        [{fieldName: 'streetNumber', width: 0.2 }, {fieldName: 'streetName'}],
+        [{fieldName: 'locality'}],
+        [{fieldName: 'state'}, {fieldName: 'zip'}]
     ]
 };
 

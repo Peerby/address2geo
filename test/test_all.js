@@ -67,7 +67,7 @@ describe('all country formats', function () {
 
             _.each(country.presentation, function (line) {
                 _.each(line, function (field) {
-                    expect(country.fields).to.have.property(field);
+                    expect(country.fields).to.have.property(field.fieldName);
                 });
             });
         });
@@ -86,10 +86,10 @@ describe('.format()', function () {
             zip: {}
         },
         presentation: [
-            [ 'addressLineOne' ],
-            [ 'addressLineTwo' ],
-            [ 'locality' ],
-            [ 'state', 'zip' ]
+            [{fieldName: 'addressLineOne' }],
+            [{fieldName: 'addressLineTwo' }],
+            [{fieldName: 'locality' }],
+            [{fieldName: 'state'}, {fieldName: 'zip'}]
         ]
     };
     it('should return default format when no country is passed', function () {
@@ -114,8 +114,8 @@ describe('.format()', function () {
                   }
               },
               "presentation": [
-                  ["streetName", "streetNumber"],
-                  ["zip"]
+                  [{fieldName: "streetName"}, {fieldName: "streetNumber", width: 0.3}],
+                  [{fieldName: "zip"}]
             ]
         };
         expect(address4geo.format('nl')).to.eql(expected);
