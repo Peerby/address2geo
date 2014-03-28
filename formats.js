@@ -16,7 +16,8 @@ var defaults = {
         addressLineTwo: {},
         locality: {},
         state: {},
-        zip: {}
+        zip: {},
+        country: {}
     },
     presentation: [
         [{fieldName: 'addressLineOne'}],
@@ -32,16 +33,17 @@ var nl = {
         streetName: {
             example: 'Hoofdstraat'
         },
-        streetNumber: {
+        houseNumber: {
             example: '101C'
         },
         zip: {
             example: '1017HG',
             regexp: /^\d{4}\s?\w{2}$/
-        }
+        },
+        country: {}
     },
     presentation: [
-        [{fieldName: 'streetName'}, {fieldName: 'streetNumber', width: 0.3}],
+        [{fieldName: 'streetName'}, {fieldName: 'houseNumber', width: 0.3}],
         [{fieldName: 'zip'}]
     ]
 };
@@ -53,7 +55,8 @@ var uk = {
         addressLineTwo: {
             optional: true
         },
-        zip: {}
+        zip: {},
+        country: {}
     },
     presentation: [
         [{fieldName: 'addressLineOne'}],
@@ -102,7 +105,8 @@ var ie = {
                 {value: "Wexford"},
                 {value: "Wicklow"}
             ]
-        }
+        },
+        country: {}
     },
     presentation: [
         [{fieldName: 'addressLineOne'}],
@@ -116,7 +120,7 @@ var ie = {
 var us = {
     fields: {
         streetName: {},
-        streetNumber: {},
+        houseNumber: {},
         locality: {},
         state: {
             values: [
@@ -181,10 +185,11 @@ var us = {
         },
         zip: {
             regexp: /^\d{5}(-\d{4})?$/    // '12345-0011' or '12345')
-        }
+        },
+        country: {}
     },
     presentation: [
-        [{fieldName: 'streetNumber', width: 0.2 }, {fieldName: 'streetName'}],
+        [{fieldName: 'houseNumber', width: 0.2 }, {fieldName: 'streetName'}],
         [{fieldName: 'locality'}],
         [{fieldName: 'state'}, {fieldName: 'zip'}]
     ]
