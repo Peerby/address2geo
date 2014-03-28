@@ -2,7 +2,7 @@
 
 "use strict";
 var _ = require('underscore');
-var formats = require('./formats.js');
+var formats = require('./lib/formats.js');
 
 
 /*

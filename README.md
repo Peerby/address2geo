@@ -77,4 +77,6 @@ Resources
 Thanks
 --------------------
 
-Thanks to [adamic](https://github.com/adamlc/address-format) for sharing his address data. We used it as inspiration and included the parsed data as js in under `/source`.
+Thanks to [adamic](https://github.com/adamlc/address-format) for sharing his address data.
+We used it as inspiration and included the parsed data as js in under `/resources`.
+

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "tdd": "mocha -R spec -w"
+    "tdd": "mocha -R spec -w -b"
   },
   "repository": {
     "type": "git",
