@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "tdd": "mocha -R spec -w -b",
+    "tdd": "_mocha -R spec -b -w",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- -R spec",
     "jsdoc": "jsdoc -r *.js -d ./jsdoc/"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "mocha": "*",
+    "istanbul": "*",
     "expect.js": "*",
     "jsdoc": "*"
   },
