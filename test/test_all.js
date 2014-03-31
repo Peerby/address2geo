@@ -35,7 +35,7 @@ var fieldOptions = {
         type: typeof true
     },
     regexp: {
-        type: typeof /\d+/
+        type: typeof ""
     },
     values: {
         type: typeof []
@@ -137,7 +137,7 @@ describe('.format()', function () {
                 },
                 zip: {
                     example: "1017HG",
-                    regexp: {}
+                    regexp: '^\\d{4}\\s?\\w{2}$'
                 },
                 country: {}
             },
