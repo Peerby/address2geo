@@ -7,8 +7,26 @@ var expect = require('expect.js');
 var address4geo = require('../index.js');
 
 
+/*
+    Format test-definitions
+*/
 
+
+// List of all country codes defined in formats.js
 var countryCodes = ['defaults', 'be', 'ie', 'nl', 'uk', 'us'];
+
+// List of possible fields in the address object
+var addressFields = [
+    'addressLineOne', 'addressLineTwo',
+    'streetName', 'houseNumber',
+    'locality', 'state', 'county', 'country',
+    'zip'
+];
+
+// Every address object should have the following fields / properties
+var ensureAddressFields = ['country'];
+
+// For each field we recognise only the following options
 var fieldOptions = {
     example: {
         type: typeof ""
@@ -23,6 +41,11 @@ var fieldOptions = {
         type: typeof []
     }
 };
+
+
+/*
+    Start tests
+*/
 
 
 // Make sure we have a parsable package.json
@@ -49,8 +72,11 @@ describe('all country formats', function () {
     it('should have valid field definitions', function () {
         _.each(address4geo.formats(), function (country) {
             expect(country).to.have.property('fields');
+            expect(country.fields).to.have.keys(ensureAddressFields);
 
             _.each(_.keys(country.fields), function (field) {
+                expect(addressFields).to.contain(field);
+
                 var fieldDef = country.fields[field];
                 _.each(_.keys(fieldDef), function (opt) {
                     expect(fieldOptions).to.have.property(opt);
@@ -83,7 +109,8 @@ describe('.format()', function () {
             addressLineTwo: {},
             locality: {},
             state: {},
-            zip: {}
+            zip: {},
+            country: {}
         },
         presentation: [
             [{fieldName: 'addressLineOne' }],
@@ -101,21 +128,22 @@ describe('.format()', function () {
 
     it("should return 'nl' structure when 'nl' is passed", function () {
         var expected = {
-              "fields": {
-                  "streetName": {
-                      "example": "Hoofdstraat"
-                  },
-                  "streetNumber": {
-                    "example": "101C"
-                  },
-                  "zip": {
-                      "example": "1017HG",
-                      "regexp": {}
-                  }
-              },
-              "presentation": [
-                  [{fieldName: "streetName"}, {fieldName: "streetNumber", width: 0.3}],
-                  [{fieldName: "zip"}]
+            "fields": {
+                streetName: {
+                    example: "Hoofdstraat"
+                },
+                houseNumber: {
+                    example: "101C"
+                },
+                zip: {
+                    example: "1017HG",
+                    regexp: {}
+                },
+                country: {}
+            },
+            presentation: [
+                [{fieldName: "streetName"}, {fieldName: "houseNumber", width: 0.3}],
+                [{fieldName: "zip"}]
             ]
         };
         expect(address4geo.format('nl')).to.eql(expected);
@@ -128,29 +156,32 @@ describe('.validate()', function () {
     it('should return [] when passed valid data', function () {
         var validData = {
             streetName: 'Blahblahgracht',
-            streetNumber: '123C',
+            houseNumber: '123C',
             zip: '1111AA',
+            country: 'nl'
         };
-        var result = address4geo.validate('nl', validData);
+        var result = address4geo.validate(validData);
         expect(result).to.eql([]);
     });
 
     it("should return [{zip: 'Missing'}] when zip is missing", function () {
         var invalidData = {
             streetName: 'Blahblahgracht',
-            streetNumber: '123C'
+            houseNumber: '123C',
+            country: 'nl'
         };
-        var result = address4geo.validate('nl', invalidData);
+        var result = address4geo.validate(invalidData);
         expect(result).to.eql([{zip: 'Missing'}]);
     });
 
     it("should return [{zip: 'Regexp fail'}] when regexp matching fails", function () {
         var invalidData = {
             streetName: 'Blahblahgracht',
-            streetNumber: '123C',
-            zip: 'AA1111'
+            houseNumber: '123C',
+            zip: 'AA1111',
+            country: 'nl'
         };
-        var result = address4geo.validate('nl', invalidData);
+        var result = address4geo.validate(invalidData);
         expect(result).to.eql([{zip: 'Regexp fail'}]);
     });
 
@@ -159,9 +190,10 @@ describe('.validate()', function () {
             addressLineOne: 'Blahblahgracht 123C',
             locality: 'locality',
             zip: 'zip',
-            county: 'unknown'
+            county: 'onbekend',
+            country: 'ie'
         };
-        var result = address4geo.validate('ie', invalidCounty);
+        var result = address4geo.validate(invalidCounty);
         expect(result).to.eql([{county: 'Invalid value'}]);
     });
 
@@ -171,10 +203,11 @@ describe('.isValid()', function () {
     it('should return true when data is fine', function () {
         var validData = {
             streetName: 'Blahblahgracht',
-            streetNumber: '123C',
+            houseNumber: '123C',
             zip: '1111AA',
+            country: 'nl'
         };
-        var result = address4geo.isValid('nl', validData);
+        var result = address4geo.isValid(validData);
         expect(result).to.eql(true);
     });
 
@@ -182,9 +215,10 @@ describe('.isValid()', function () {
     it("should return false on invalid data", function () {
         var invalidData = {
             streetName: 'Blahblahgracht',
-            streetNumber: '123C'
+            houseNumber: '123C',
+            country: 'nl'
         };
-        var result = address4geo.isValid('nl', invalidData);
+        var result = address4geo.isValid(invalidData);
         expect(result).to.eql(false);
     });
 });

@@ -2,12 +2,20 @@
 
 "use strict";
 var _ = require('underscore');
-var formats = require('./formats.js');
+var formats = require('./lib/formats.js');
 
 
 /*
     Exported functions
 */
+
+/**
+ * Retrieve country address format for a specified country
+ *
+ * @default default
+ * @param country string
+ * @return object
+ */
 
 function format(country) {
     if (!country) {
@@ -18,14 +26,33 @@ function format(country) {
 }
 
 
+/**
+ * Retrieve complete list of formats for each country
+ *
+ * @return object
+ */
+
 function allFormats() {
     return formats;
 }
 
 
-function validate(country, address) {
-    var fields = format(country).fields;
+/**
+ * Validates an address agains the field definitions for the given address.country
+ *
+ * @return
+ *     list of errors on error
+ *     [] when OK
+ */
+
+function validate(address) {
+    var country = address.country;
     var invalidFields = [];
+
+    if (!country) {
+        throw new Error('No country specified');
+    }
+    var fields = format(country).fields;
 
     function fieldError(field, message) {
         var err = {};
@@ -52,13 +79,32 @@ function validate(country, address) {
 }
 
 
-function isValid(country, address) {
-    var invalidFieldsList = validate(country, address);
+/**
+ * Validates an address agains the field definitions for the given address.country
+ *
+ * @return true or false
+ */
+
+function isValid(address) {
+    var country = address.country;
+    if (!country) {
+        throw new Error('No country specified');
+    }
+
+    var invalidFieldsList = validate(address);
     return (invalidFieldsList.length === 0);
 }
 
 
-function geoString(country, address) {
+/**
+ * Exports geolookup string for a given address based on address.country
+ *
+ * Note: Not implemented yet
+ *
+ * @return String
+ */
+
+function geoString(address) {
     throw new Error('Not implemented');
 }
 
