@@ -37,7 +37,7 @@ var nl = {
         },
         zip: {
             example: '1017HG',
-            regexp: /^\d{4}\s?\w{2}$/
+            regexp: '^\d{4}\s?\w{2}$'
         }
     },
     presentation: [
@@ -180,7 +180,7 @@ var us = {
             ]
         },
         zip: {
-            regexp: /^\d{5}(-\d{4})?$/    // '12345-0011' or '12345')
+            regexp: '^\d{5}(-\d{4})?$'    // '12345-0011' or '12345')
         }
     },
     presentation: [
