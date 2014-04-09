@@ -13,7 +13,7 @@ var address4geo = require('../index.js');
 
 
 // List of all country codes defined in formats.js
-var countryCodes = ['defaults', 'be', 'ie', 'nl', 'uk', 'us'];
+var countryCodes = ['defaults', 'be', 'ie', 'nl', 'gb', 'us'];
 
 // List of possible fields in the address object
 var addressFields = [
@@ -144,10 +144,29 @@ describe('.format()', function () {
             presentation: [
                 [{fieldName: "streetName"}, {fieldName: "houseNumber", width: 0.3}],
                 [{fieldName: "zip"}]
-            ]
+            ],
+            geoTemplate:
+                "<%= zip %>, Netherlands, <%= streetName %> <%= houseNumber %>"
         };
         expect(address4geo.format('nl')).to.eql(expected);
     });
+});
+
+
+describe('.geolocation', function () {
+    it('should return a valid geostring for a nl addres', function () {
+        var address = {
+            streetName: 'Herengracht',
+            houseNumber: 182,
+            zip: '1122AA',
+            locality: 'Amsterdam',
+            country: 'nl'
+        };
+        var expected = '1122AA, Netherlands, Herengracht 182';
+
+        var geostring = address4geo.geostring(address);
+        expect(geostring).to.be.equal(expected);
+    })
 });
 
 

@@ -12,7 +12,6 @@ var formats = require('./lib/formats.js');
 /**
  * Retrieve country address format for a specified country
  *
- * @default default
  * @param country string
  * @return object
  */
@@ -23,6 +22,20 @@ function format(country) {
     }
     country = String(country).toLowerCase();
     return formats[country] || formats.defaults;
+}
+
+
+/**
+ * Build Geolocation string for a given address
+ *
+ * @param address
+ * @return string
+ */
+
+function geostring(address) {
+  var format = formats[address.country];
+  var template = _.template(format.geoTemplate);
+  return template(address);
 }
 
 
@@ -115,6 +128,7 @@ function geoString(address) {
 
 module.exports = {
     format: format,
+    geostring: geostring,
     validate: validate,
     isValid: isValid,
     geoString: geoString,
