@@ -207,6 +207,18 @@ describe('.validate()', function () {
         expect(result).to.eql([{zip: 'Regexp fail'}]);
     });
 
+    it("should return ok when a valid county us passed", function () {
+        var invalidCounty = {
+            addressLineOne: 'Blahblahgracht 123C',
+            locality: 'locality',
+            zip: 'zip',
+            county: 'Carlow',
+            country: 'ie'
+        };
+        var result = address4geo.validate(invalidCounty);
+        expect(result).to.eql([]);
+    })
+
     it("should return [{county: 'Invalid value'}] when unknown county is passed", function () {
         var invalidCounty = {
             addressLineOne: 'Blahblahgracht 123C',

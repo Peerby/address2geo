@@ -84,7 +84,7 @@ function validate(address) {
             invalidFields.push(fieldError(field, 'Regexp fail'));
         }
         // Field must be one in a list of defined values
-        if (fields[field].values && fields[field].values.indexOf(address[field]) === -1) {
+        if (fields[field].values && !_.findWhere(fields[field].values, {value: address[field]})) {
             invalidFields.push(fieldError(field, 'Invalid value'));
         }
     });
