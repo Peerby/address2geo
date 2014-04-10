@@ -133,7 +133,8 @@ describe('.format()', function () {
         var expected = {
             "fields": {
                 streetName: {
-                    example: "Hoofdstraat"
+                    example: "Hoofdstraat",
+                    optional: true,
                 },
                 houseNumber: {
                     example: "101C"
