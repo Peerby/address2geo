@@ -106,7 +106,9 @@ describe('.format()', function () {
     var expectedDefault = {
         fields: {
             addressLineOne: {},
-            addressLineTwo: {},
+            addressLineTwo: {
+                optional: true
+            },
             locality: {},
             state: {},
             zip: {},
@@ -117,7 +119,8 @@ describe('.format()', function () {
             [{fieldName: 'addressLineTwo' }],
             [{fieldName: 'locality' }],
             [{fieldName: 'state'}, {fieldName: 'zip'}]
-        ]
+        ],
+        geoTemplate: "<%= zip %>, <%= locality %>, <%= country %>, <%= addressLineOne %> <%= addressLineTwo %>"
     };
     it('should return default format when no country is passed', function () {
         expect(address4geo.format()).to.eql(expectedDefault);
