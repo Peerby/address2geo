@@ -13,7 +13,7 @@ var address4geo = require('../index.js');
 
 
 // List of all country codes defined in formats.js
-var countryCodes = ['defaults', 'be', 'ie', 'nl', 'gb', 'us'];
+var countryCodes = ['defaults', 'at', 'be', 'de', 'fr', 'ie', 'nl', 'gb', 'us'];
 
 // List of possible fields in the address object
 var addressFields = [
