@@ -62,8 +62,10 @@ function validate(address) {
     var country = address.country;
     var invalidFields = [];
 
+    // Shortcut no-country error,
+    //  we are clueless without a country
     if (!country) {
-        throw new Error('No country specified');
+        return [{country: 'Missing'}];
     }
     var fields = format(country).fields;
 
@@ -99,26 +101,8 @@ function validate(address) {
  */
 
 function isValid(address) {
-    var country = address.country;
-    if (!country) {
-        throw new Error('No country specified');
-    }
-
     var invalidFieldsList = validate(address);
     return (invalidFieldsList.length === 0);
-}
-
-
-/**
- * Exports geolookup string for a given address based on address.country
- *
- * Note: Not implemented yet
- *
- * @return String
- */
-
-function geoString(address) {
-    throw new Error('Not implemented');
 }
 
 
@@ -131,7 +115,6 @@ module.exports = {
     geostring: geostring,
     validate: validate,
     isValid: isValid,
-    geoString: geoString,
 
     formats: allFormats
 };

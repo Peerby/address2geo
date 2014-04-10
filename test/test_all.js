@@ -157,7 +157,7 @@ describe('.format()', function () {
 });
 
 
-describe('.geolocation', function () {
+describe('.geostring', function () {
     it('should return a valid geostring for a nl addres', function () {
         var address = {
             streetName: 'Herengracht',
@@ -175,6 +175,11 @@ describe('.geolocation', function () {
 
 
 describe('.validate()', function () {
+
+    it('should return error when country is missing', function () {
+        var result = address4geo.validate({});
+        expect(result).to.eql([{country: 'Missing'}]);
+    });
 
     it('should return [] when passed valid data', function () {
         var validData = {
@@ -208,7 +213,7 @@ describe('.validate()', function () {
         expect(result).to.eql([{zip: 'Regexp fail'}]);
     });
 
-    it("should return ok when a valid county us passed", function () {
+    it("should return ok when a valid county is passed", function () {
         var invalidCounty = {
             addressLineOne: 'Blahblahgracht 123C',
             locality: 'locality',
