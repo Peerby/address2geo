@@ -132,10 +132,6 @@ describe('.format()', function () {
     it("should return 'nl' structure when 'nl' is passed", function () {
         var expected = {
             "fields": {
-                streetName: {
-                    example: "Hoofdstraat",
-                    optional: true,
-                },
                 houseNumber: {
                     example: "101C"
                 },
@@ -146,8 +142,7 @@ describe('.format()', function () {
                 country: {}
             },
             presentation: [
-                [{fieldName: "streetName"}, {fieldName: "houseNumber", width: 0.3}],
-                [{fieldName: "zip"}]
+                [{fieldName: "zip"}, {fieldName: "houseNumber", width: 0.3}],
             ],
             geoTemplate:
                 "<%= zip %>, Netherlands, <%= streetName %> <%= houseNumber %>"
