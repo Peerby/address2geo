@@ -17,7 +17,7 @@ var formats = require('./lib/formats.js');
  */
 
 function format(country) {
-    if (!country) {
+    if (!country || (!country in formats)) {
         return formats.defaults;
     }
     country = String(country).toLowerCase();
@@ -33,8 +33,8 @@ function format(country) {
  */
 
 function geostring(address) {
-  var format = formats[address.country];
-  var template = _.template(format.geoTemplate);
+  var countryFormat = format(address.country);
+  var template = _.template(countryFormat.geoTemplate);
   return template(address);
 }
 

@@ -158,6 +158,7 @@ describe('.format()', function () {
 
 
 describe('.geostring', function () {
+
     it('should return a valid geostring for a nl addres', function () {
         var address = {
             streetName: 'Herengracht',
@@ -170,7 +171,23 @@ describe('.geostring', function () {
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
-    })
+    });
+
+    it('should return a valid geostring for a default addres', function () {
+        var address = {
+            addressLineOne: 'Unknownstr 182',
+            addressLineTwo: '',
+            zip: '1234XY',
+            locality: 'Unknowncity',
+            state: 'Unknownstate',
+            country: 'XX'
+        };
+        var expected = '1234XY, Unknowncity, XX, Unknownstr 182 ';
+
+        var geostring = address4geo.geostring(address);
+        expect(geostring).to.be.equal(expected);
+    });
+
 });
 
 
