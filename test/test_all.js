@@ -120,7 +120,7 @@ describe('.format()', function () {
             [{fieldName: 'locality' }],
             [{fieldName: 'state'}, {fieldName: 'zip'}]
         ],
-        geoTemplate: "<%= zip %>, <%= locality %>, <%= country %>, <%= addressLineOne %> <%= addressLineTwo %>"
+        geoTemplate: "<%= zip %>, <%= locality %>, <%= addressLineOne %> <%= addressLineTwo %>, <%= country %>"
     };
     it('should return default format when no country is passed', function () {
         expect(address4geo.format()).to.eql(expectedDefault);
@@ -182,7 +182,7 @@ describe('.geostring', function () {
             state: 'Unknownstate',
             country: 'XX'
         };
-        var expected = '1234XY, Unknowncity, XX, Unknownstr 182 ';
+        var expected = '1234XY, Unknowncity, Unknownstr 182 , XX';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
