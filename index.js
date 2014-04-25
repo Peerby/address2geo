@@ -2,8 +2,8 @@
 
 "use strict";
 var _ = require('underscore');
-var formats = require('./lib/formats.js');
-
+var formats = require('./lib/formats');
+var countries = require('./lib/countries');
 
 /*
     Exported functions
@@ -33,9 +33,12 @@ function format(country) {
  */
 
 function geostring(address) {
-  var countryFormat = format(address.country);
-  var template = _.template(countryFormat.geoTemplate);
-  return template(address);
+    var countryFormat = format(address.country);
+
+    var clonedAddress = _.clone(address);
+    clonedAddress.country = countries(address.country);
+    var template = _.template(countryFormat.geoTemplate);
+    return template(clonedAddress);
 }
 
 

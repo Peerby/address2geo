@@ -120,8 +120,9 @@ describe('.format()', function () {
             [{fieldName: 'locality' }],
             [{fieldName: 'state'}, {fieldName: 'zip'}]
         ],
-        geoTemplate: "<%= zip %>, <%= locality %>, <%= addressLineOne %> <%= addressLineTwo %>, <%= country %>"
+        geoTemplate: "<%= zip %>, <%= locality %>, <%= country %>, <%= addressLineOne %>, <%= addressLineTwo %>"
     };
+
     it('should return default format when no country is passed', function () {
         expect(address4geo.format()).to.eql(expectedDefault);
     });
@@ -173,16 +174,31 @@ describe('.geostring', function () {
         expect(geostring).to.be.equal(expected);
     });
 
-    it('should return a valid geostring for a default addres', function () {
+    it('should return a valid geostring for a default address in an imaginary country', function () {
         var address = {
             addressLineOne: 'Unknownstr 182',
-            addressLineTwo: '',
+            addressLineTwo: 'Unknownaddresss Apt',
             zip: '1234XY',
             locality: 'Unknowncity',
             state: 'Unknownstate',
             country: 'XX'
         };
-        var expected = '1234XY, Unknowncity, Unknownstr 182 , XX';
+        var expected = '1234XY, Unknowncity, XX, Unknownstr 182, Unknownaddresss Apt';
+
+        var geostring = address4geo.geostring(address);
+        expect(geostring).to.be.equal(expected);
+    });
+
+    it('should return a valid geostring for a default address in an existing country', function () {
+        var address = {
+            addressLineOne: 'Unknownstr 182',
+            addressLineTwo: 'Unknownaddresss Apt',
+            zip: '1234XY',
+            locality: 'Unknowncity',
+            state: 'Unknownstate',
+            country: 'ky'
+        };
+        var expected = '1234XY, Unknowncity, Cayman Islands, Unknownstr 182, Unknownaddresss Apt';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
@@ -240,7 +256,7 @@ describe('.validate()', function () {
         };
         var result = address4geo.validate(invalidCounty);
         expect(result).to.eql([]);
-    })
+    });
 
     it("should return [{county: 'Invalid value'}] when unknown county is passed", function () {
         var invalidCounty = {
