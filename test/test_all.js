@@ -150,7 +150,7 @@ describe('.format()', function () {
                 [{fieldName: "zip"}]
             ],
             geoTemplate:
-                "<%= zip %>, Netherlands, <%= streetName %> <%= houseNumber %>"
+                "<%= zip %>, The Netherlands, <%= streetName %> <%= houseNumber %>"
         };
         expect(address4geo.format('nl')).to.eql(expected);
     });
@@ -167,7 +167,7 @@ describe('.geostring', function () {
             locality: 'Amsterdam',
             country: 'nl'
         };
-        var expected = '1122AA, Netherlands, Herengracht 182';
+        var expected = '1122AA, The Netherlands, Herengracht 182';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
