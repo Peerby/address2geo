@@ -110,7 +110,6 @@ describe('.format()', function () {
                 optional: true
             },
             locality: {},
-            state: {},
             zip: {},
             country: {}
         },
@@ -118,7 +117,7 @@ describe('.format()', function () {
             [{fieldName: 'addressLineOne' }],
             [{fieldName: 'addressLineTwo' }],
             [{fieldName: 'locality' }],
-            [{fieldName: 'state'}, {fieldName: 'zip'}]
+            [{fieldName: 'zip'}]
         ],
         geoTemplate: "<%= zip %>, <%= locality %>, <%= country %>, <%= addressLineOne %>, <%= addressLineTwo %>"
     };
