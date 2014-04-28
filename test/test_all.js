@@ -203,6 +203,48 @@ describe('.geostring', function () {
         expect(geostring).to.be.equal(expected);
     });
 
+    var us = {
+        fields: {
+            streetName: {},
+            houseNumber: {},
+            zip: {
+                regexp: '^\\d{5}(-\\d{4})?$'    // '12345-0011' or '12345')
+            },
+            country: {}
+        },
+        presentation: [
+            [{fieldName: 'houseNumber', width: 0.2 }, {fieldName: 'streetName'}],
+            [{fieldName: 'zip'}]
+        ],
+        geoTemplate: "<%= zip %>, United States, <%= streetName %>, <%= houseNumber %>"
+    };
+
+
+    it('should contain all required fields', function() {
+        _.each(countryCodes, function (countryCode) {
+            var format = address4geo.format(countryCode),
+                geoTemplate = format.geoTemplate;
+
+            var fieldsNotFound = [];
+            _.each(format.fields, function (val, key) {
+                if (key === 'country') {
+                    return;
+                }
+
+                if (val.optional) {
+                    return;
+                }
+                var containsField = geoTemplate.split(key).length > 1;
+
+                if (!containsField) {
+                    fieldsNotFound.push(countryCode + ' template does not contain ' + key);
+                }
+            });
+
+            expect(fieldsNotFound).to.eql([]);
+        });
+    });
+
 });
 
 
