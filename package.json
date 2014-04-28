@@ -1,6 +1,6 @@
 {
   "name": "address4geo",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "a module for supplying the fields an international address has based on geo",
   "main": "index.js",
   "scripts": {
