@@ -109,8 +109,12 @@ describe('.format()', function () {
             addressLineTwo: {
                 optional: true
             },
-            locality: {},
-            zip: {},
+            locality: {
+                optional: true
+            },
+            zip: {
+                optional: true
+            },
             country: {}
         },
         presentation: [
@@ -119,7 +123,7 @@ describe('.format()', function () {
             [{fieldName: 'locality' }],
             [{fieldName: 'zip'}]
         ],
-        geoTemplate: "<%= zip %>, <%= locality %>, <%= country %>, <%= addressLineOne %>, <%= addressLineTwo %>"
+        geoTemplate: "<%= addressLineOne %>, <%= addressLineTwo %>, <%= zip %>, <%= locality %>, <%= country %>"
     };
 
     it('should return default format when no country is passed', function () {
@@ -150,7 +154,7 @@ describe('.format()', function () {
                 [{fieldName: "zip"}]
             ],
             geoTemplate:
-                "<%= zip %>, The Netherlands, <%= streetName %> <%= houseNumber %>"
+                "<%= streetName %> <%= houseNumber %>, <%= zip %>, The Netherlands"
         };
         expect(address4geo.format('nl')).to.eql(expected);
     });
@@ -167,7 +171,7 @@ describe('.geostring', function () {
             locality: 'Amsterdam',
             country: 'nl'
         };
-        var expected = '1122AA, The Netherlands, Herengracht 182';
+        var expected = 'Herengracht 182, 1122AA, The Netherlands';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
@@ -182,7 +186,7 @@ describe('.geostring', function () {
             state: 'Unknownstate',
             country: 'XX'
         };
-        var expected = '1234XY, Unknowncity, XX, Unknownstr 182, Unknownaddresss Apt';
+        var expected = 'Unknownstr 182, Unknownaddresss Apt, 1234XY, Unknowncity, XX';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
@@ -197,7 +201,7 @@ describe('.geostring', function () {
             state: 'Unknownstate',
             country: 'ky'
         };
-        var expected = '1234XY, Unknowncity, Cayman Islands, Unknownstr 182, Unknownaddresss Apt';
+        var expected = 'Unknownstr 182, Unknownaddresss Apt, 1234XY, Unknowncity, Cayman Islands';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
