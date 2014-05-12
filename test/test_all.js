@@ -109,19 +109,23 @@ describe('.format()', function () {
             addressLineTwo: {
                 optional: true
             },
-            locality: {},
-            state: {},
-            zip: {},
+            locality: {
+                optional: true
+            },
+            zip: {
+                optional: true
+            },
             country: {}
         },
         presentation: [
             [{fieldName: 'addressLineOne' }],
             [{fieldName: 'addressLineTwo' }],
             [{fieldName: 'locality' }],
-            [{fieldName: 'state'}, {fieldName: 'zip'}]
+            [{fieldName: 'zip'}]
         ],
-        geoTemplate: "<%= zip %>, <%= locality %>, <%= country %>, <%= addressLineOne %> <%= addressLineTwo %>"
+        geoTemplate: "<%= addressLineOne %>, <%= addressLineTwo %>, <%= zip %>, <%= locality %>, <%= country %>"
     };
+
     it('should return default format when no country is passed', function () {
         expect(address4geo.format()).to.eql(expectedDefault);
     });
@@ -150,7 +154,7 @@ describe('.format()', function () {
                 [{fieldName: "zip"}]
             ],
             geoTemplate:
-                "<%= zip %>, Netherlands, <%= streetName %> <%= houseNumber %>"
+                "<%= streetName %> <%= houseNumber %>, <%= zip %>, The Netherlands"
         };
         expect(address4geo.format('nl')).to.eql(expected);
     });
@@ -158,6 +162,7 @@ describe('.format()', function () {
 
 
 describe('.geostring', function () {
+
     it('should return a valid geostring for a nl addres', function () {
         var address = {
             streetName: 'Herengracht',
@@ -166,11 +171,84 @@ describe('.geostring', function () {
             locality: 'Amsterdam',
             country: 'nl'
         };
-        var expected = '1122AA, Netherlands, Herengracht 182';
+        var expected = 'Herengracht 182, 1122AA, The Netherlands';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
-    })
+    });
+
+    it('should return a valid geostring for a default address in an imaginary country', function () {
+        var address = {
+            addressLineOne: 'Unknownstr 182',
+            addressLineTwo: 'Unknownaddresss Apt',
+            zip: '1234XY',
+            locality: 'Unknowncity',
+            state: 'Unknownstate',
+            country: 'XX'
+        };
+        var expected = 'Unknownstr 182, Unknownaddresss Apt, 1234XY, Unknowncity, XX';
+
+        var geostring = address4geo.geostring(address);
+        expect(geostring).to.be.equal(expected);
+    });
+
+    it('should return a valid geostring for a default address in an existing country', function () {
+        var address = {
+            addressLineOne: 'Unknownstr 182',
+            addressLineTwo: 'Unknownaddresss Apt',
+            zip: '1234XY',
+            locality: 'Unknowncity',
+            state: 'Unknownstate',
+            country: 'ky'
+        };
+        var expected = 'Unknownstr 182, Unknownaddresss Apt, 1234XY, Unknowncity, Cayman Islands';
+
+        var geostring = address4geo.geostring(address);
+        expect(geostring).to.be.equal(expected);
+    });
+
+    var us = {
+        fields: {
+            streetName: {},
+            houseNumber: {},
+            zip: {
+                regexp: '^\\d{5}(-\\d{4})?$'    // '12345-0011' or '12345')
+            },
+            country: {}
+        },
+        presentation: [
+            [{fieldName: 'houseNumber', width: 0.2 }, {fieldName: 'streetName'}],
+            [{fieldName: 'zip'}]
+        ],
+        geoTemplate: "<%= zip %>, United States, <%= streetName %>, <%= houseNumber %>"
+    };
+
+
+    it('should contain all required fields', function() {
+        _.each(countryCodes, function (countryCode) {
+            var format = address4geo.format(countryCode),
+                geoTemplate = format.geoTemplate;
+
+            var fieldsNotFound = [];
+            _.each(format.fields, function (val, key) {
+                if (key === 'country') {
+                    return;
+                }
+
+                if (val.optional) {
+                    return;
+                }
+                var containsField = geoTemplate.split(key).length > 1;
+
+                if (!containsField) {
+                    fieldsNotFound.push(countryCode + ' template does not contain ' + key);
+                }
+            });
+
+            expect(fieldsNotFound).to.eql([]);
+        });
+    });
+
 });
 
 
@@ -223,7 +301,7 @@ describe('.validate()', function () {
         };
         var result = address4geo.validate(invalidCounty);
         expect(result).to.eql([]);
-    })
+    });
 
     it("should return [{county: 'Invalid value'}] when unknown county is passed", function () {
         var invalidCounty = {
