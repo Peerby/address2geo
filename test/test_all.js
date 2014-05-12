@@ -249,6 +249,8 @@ describe('.isValid()', function () {
         };
         var result = address4geo.isValid(validData);
         expect(result).to.eql(true);
+        validData.zip = '1111 AA';
+        expect(address4geo.isValid(validData)).to.eql(true);
     });
 
 
