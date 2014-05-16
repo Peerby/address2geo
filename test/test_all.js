@@ -315,7 +315,19 @@ describe('.validate()', function () {
         expect(result).to.eql([{county: 'Invalid value'}]);
     });
 
+    it("should return an error when extra data is passed", function () {
+        var validData = {
+            streetName: 'Blahblahgracht',
+            houseNumber: '123C',
+            zip: '1111AA',
+            country: 'nl',
+            extraField: 'Oh noes'
+        };
+        var result = address4geo.validate(validData);
+        expect(result).to.eql([{extraField: 'Unknown field'}]);
+    });
 });
+
 
 describe('.isValid()', function () {
     it('should return true when data is fine', function () {

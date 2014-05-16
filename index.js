@@ -78,6 +78,7 @@ function validate(address) {
         return err;
     }
 
+    // Check if all the fields match the expectations
     _.keys(fields).forEach( function (field) {
         // Field must be defined unless marked as optional
         if (!address[field] && !fields[field].optional) {
@@ -93,6 +94,14 @@ function validate(address) {
             invalidFields.push(fieldError(field, 'Invalid value'));
         }
     });
+
+    // Check for extra fields
+    _.keys(address).forEach( function (field) {
+        if (!(field in fields)) {
+            invalidFields.push(fieldError(field, 'Unknown field'));
+        }
+    });
+
     return invalidFields;
 }
 
