@@ -17,7 +17,7 @@ var countries = require('./lib/countries');
  */
 
 function format(country) {
-    if (!country || (!country in formats)) {
+    if ((!country) || !(country in formats)) {
         return formats.defaults;
     }
     country = String(country).toLowerCase();
@@ -96,11 +96,11 @@ function validate(address) {
     });
 
     // Check for extra fields
-    _.keys(address).forEach( function (field) {
-        if (!(field in fields)) {
-            invalidFields.push(fieldError(field, 'Unknown field'));
-        }
-    });
+    // _.keys(address).forEach( function (field) {
+    //     if (!(field in fields)) {
+    //         invalidFields.push(fieldError(field, 'Unknown field'));
+    //     }
+    // });
 
     return invalidFields;
 }
