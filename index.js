@@ -33,12 +33,25 @@ function format(country) {
  */
 
 function geostring(address) {
-    var countryFormat = format(address.country);
+    //retrieve the addressFormat for the provided country
+    var addressFormat = format(address.country);
 
-    var clonedAddress = _.clone(address);
-    clonedAddress.country = countries(address.country);
-    var template = _.template(countryFormat.geoTemplate);
-    return template(clonedAddress);
+    //store all fields in an object with empty strings as values
+    //so that the template function can inject those fields
+    var defaultAddress = {};
+    _.each(addressFormat.fields, function (val, key) {
+        defaultAddress[key] = '';
+    });
+
+    //overwrite the default fields (empty values) with user-provided values
+    address = _.extend(defaultAddress, address);
+
+    //use the full name of the country because it works better for reverse geocoding
+    address.country = countries(address.country);
+
+    //create a template function and run it on the address
+    var template = _.template(addressFormat.geoTemplate);
+    return template(address);
 }
 
 

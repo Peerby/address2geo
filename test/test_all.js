@@ -163,7 +163,7 @@ describe('.format()', function () {
 
 describe('.geostring', function () {
 
-    it('should return a valid geostring for a nl addres', function () {
+    it('should return a valid geostring for a nl address', function () {
         var address = {
             streetName: 'Herengracht',
             houseNumber: 182,
@@ -247,6 +247,18 @@ describe('.geostring', function () {
 
             expect(fieldsNotFound).to.eql([]);
         });
+    });
+
+    it('should return a valid geostring when an optional field is missing', function () {
+        var address = {
+            houseNumber: 182,
+            zip: '1122AA',
+            country: 'nl'
+        };
+        var expected = ' 182, 1122AA, The Netherlands';
+
+        var geostring = address4geo.geostring(address);
+        expect(geostring).to.be.equal(expected);
     });
 
 });
