@@ -2,3 +2,4 @@ node_modules/
 coverage/
 jsdoc/
 
+._.DS_Store

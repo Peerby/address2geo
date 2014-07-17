@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "tdd": "_mocha -R spec -b -w",
+    "tdd": "mocha -R spec -b -w",
     "coverage": "istanbul cover ./node_modules/.bin/_mocha -- -R spec",
     "jsdoc": "jsdoc -r *.js -d ./jsdoc/"
   },
