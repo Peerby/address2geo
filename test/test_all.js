@@ -109,19 +109,16 @@ describe('.format()', function () {
             addressLineTwo: {
                 optional: true
             },
-            locality: {
-                optional: true
-            },
             zip: {
                 optional: true
             },
+            locality: {},
             country: {}
         },
         presentation: [
             [{fieldName: 'addressLineOne' }],
             [{fieldName: 'addressLineTwo' }],
-            [{fieldName: 'locality' }],
-            [{fieldName: 'zip'}]
+            [{fieldName: 'zip'}, {fieldName: 'locality'}],
         ],
         geoTemplate: "<%= addressLineOne %>, <%= addressLineTwo %>, <%= zip %>, <%= locality %>, <%= country %>"
     };
@@ -147,14 +144,15 @@ describe('.format()', function () {
                     example: "1017HG",
                     regexp: '^\\d{4}\\s?\\w{2}$'
                 },
+                locality: {},
                 country: {}
             },
             presentation: [
                 [{fieldName: "streetName"}, {fieldName: "houseNumber", width: 0.3}],
-                [{fieldName: "zip"}]
+                [{fieldName: "zip"}, {fieldName: 'locality'}]
             ],
             geoTemplate:
-                "<%= streetName %> <%= houseNumber %>, <%= zip %>, The Netherlands"
+                "<%= streetName %> <%= houseNumber %>, <%= zip %>, <%= locality %>, The Netherlands"
         };
         expect(address4geo.format('nl')).to.eql(expected);
     });
@@ -171,7 +169,7 @@ describe('.geostring', function () {
             locality: 'Amsterdam',
             country: 'nl'
         };
-        var expected = 'Herengracht 182, 1122AA, The Netherlands';
+        var expected = 'Herengracht 182, 1122AA, Amsterdam, The Netherlands';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
@@ -250,12 +248,14 @@ describe('.geostring', function () {
     });
 
     it('should return a valid geostring when an optional field is missing', function () {
+        // streetName is optional, and missing
         var address = {
             houseNumber: 182,
             zip: '1122AA',
+            locality: 'Amsterdam',
             country: 'nl'
         };
-        var expected = ' 182, 1122AA, The Netherlands';
+        var expected = ' 182, 1122AA, Amsterdam, The Netherlands';
 
         var geostring = address4geo.geostring(address);
         expect(geostring).to.be.equal(expected);
@@ -276,6 +276,7 @@ describe('.validate()', function () {
             streetName: 'Blahblahgracht',
             houseNumber: '123C',
             zip: '1111AA',
+            locality: 'Amsterdam',
             country: 'nl'
         };
         var result = address4geo.validate(validData);
@@ -286,6 +287,7 @@ describe('.validate()', function () {
         var invalidData = {
             streetName: 'Blahblahgracht',
             houseNumber: '123C',
+            locality: 'Amsterdam',
             country: 'nl'
         };
         var result = address4geo.validate(invalidData);
@@ -297,6 +299,7 @@ describe('.validate()', function () {
             streetName: 'Blahblahgracht',
             houseNumber: '123C',
             zip: 'AA1111',
+            locality: 'Amsterdam',
             country: 'nl'
         };
         var result = address4geo.validate(invalidData);
@@ -349,6 +352,7 @@ describe('.isValid()', function () {
             streetName: 'Blahblahgracht',
             houseNumber: '123C',
             zip: '1111AA',
+            locality: 'Amsterdam',
             country: 'nl'
         };
         var result = address4geo.isValid(validData);
