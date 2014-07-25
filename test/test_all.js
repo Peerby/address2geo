@@ -144,7 +144,9 @@ describe('.format()', function () {
                     example: "1017HG",
                     regexp: '^\\d{4}\\s?\\w{2}$'
                 },
-                locality: {},
+                locality: {
+                    example: 'Amsterdam'
+                },
                 country: {}
             },
             presentation: [
