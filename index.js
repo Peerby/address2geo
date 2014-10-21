@@ -141,6 +141,5 @@ module.exports = {
     validate: validate,
     isValid: isValid,
 
-    countries: countries,
     formats: allFormats
 };
