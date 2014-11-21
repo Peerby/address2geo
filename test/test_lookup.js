@@ -28,7 +28,7 @@ var lookupTable = [
             country: 'nl'
         },
         result: {
-            formatted_address: 'Herengracht 182, 1016 BR Amsterdam, The Netherlands'
+            formatted_address: 'Herengracht 182, 1016 BR Amsterdam, Netherlands'
         }
     },
     {
