@@ -135,7 +135,7 @@ describe('.format()', function () {
             "fields": {
                 streetName: {
                     example: "Hoofdstraat",
-                    optional: true,
+                    optional: false,
                 },
                 houseNumber: {
                     example: "101C"
