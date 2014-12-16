@@ -19,6 +19,7 @@
     "geo"
   ],
   "dependencies": {
+    "request": "^2.51.0",
     "underscore": "1.4.x"
   },
   "devDependencies": {

@@ -37,6 +37,9 @@ var fieldOptions = {
     regexp: {
         type: typeof ""
     },
+    parse: {
+        type: typeof []
+    },
     values: {
         type: typeof []
     }
@@ -70,7 +73,7 @@ describe('all country formats', function () {
 
     // Validate field properties of the listed fields
     it('should have valid field definitions', function () {
-        _.each(address4geo.formats(), function (country) {
+        _.each(address4geo.formats(), function (country, name) {
             expect(country).to.have.property('fields');
             expect(country.fields).to.have.keys(ensureAddressFields);
 
@@ -142,7 +145,8 @@ describe('.format()', function () {
                 },
                 zip: {
                     example: "1017HG",
-                    regexp: '^\\d{4}\\s?\\w{2}$'
+                    regexp: '^\\d{4}\\s?\\w{2}$',
+                    parse: ['split: ', 'join:']
                 },
                 locality: {
                     example: 'Amsterdam'
@@ -167,7 +171,7 @@ describe('.geostring', function () {
         var address = {
             streetName: 'Herengracht',
             houseNumber: 182,
-            zip: '1122AA',
+            zip: '1122 AA',
             locality: 'Amsterdam',
             country: 'nl'
         };

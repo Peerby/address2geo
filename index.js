@@ -39,8 +39,16 @@ function geostring(address) {
     //store all fields in an object with empty strings as values
     //so that the template function can inject those fields
     var defaultAddress = {};
+
+    //get parser information from format
+    var parsers = {};
+
     _.each(addressFormat.fields, function (val, key) {
         defaultAddress[key] = '';
+
+        if(val.parse){
+            parsers[key] = val.parse;
+        }
     });
 
     //overwrite the default fields (empty values) with user-provided values
@@ -48,6 +56,11 @@ function geostring(address) {
 
     //use the full name of the country because it works better for reverse geocoding
     address.country = countries(address.country);
+
+    //use parser information to transform the components
+    _.each(parsers, function(stack, key){
+        address[key] = applyParser(stack, address[key]);
+    });
 
     //create a template function and run it on the address
     var template = _.template(addressFormat.geoTemplate);
@@ -130,6 +143,26 @@ function isValid(address) {
     return (invalidFieldsList.length === 0);
 }
 
+/**
+ * Applies a parser array stack, like ['split: ', 'join:'] to a string
+ * @param  {Array} parser an array of 'method:argument' strings
+ * @param  {String} str    [value to be applied to]
+ * @return {String}        [Resulting value]
+ */
+function applyParser(parser, str){
+    var parserClone = parser.concat(),
+        split, method, argument;
+    
+    while(parserClone.length){
+        split = parserClone.shift().split(':');
+        method = split.shift();
+        argument = split.shift();
+
+        str = str[method](argument);
+    }
+
+    return str;
+}
 
 /*
     Exports
