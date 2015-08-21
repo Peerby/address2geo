@@ -2,4 +2,7 @@ node_modules/
 coverage/
 jsdoc/
 
+npm-debug.log
+
 ._.DS_Store
+.DS_Store
